@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
+import './Home.css'
 
 class Home extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Pepino</h1>
+      <div className="wrapper">
+        <div className="Home-titleslide">
+          <h1>Pepino</h1>
           <p>A recipe manager</p>
-        </header>
-        <ul className="App-intro">
-          <li>Add a recipe</li>
-          <li>View existing recipes</li>
-          <li>Meal planning</li>
-        </ul>
+        </div>
+        <div className="Home-navigation">
+          <ul className="Home-links">
+            <li>Add a recipe</li>
+            <li>View existing recipes</li>
+            <li>Meal planning</li>
+          </ul>
+        </div>
       </div>
     );
   }

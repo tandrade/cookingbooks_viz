@@ -1,0 +1,14 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.Home-titleslide {
+  background-color: #FFC929;
+}
+
+
+.Home-titleslide p {
+  font-weight: 700;
+  font-size: 20px;
+}
