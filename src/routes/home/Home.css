@@ -1,14 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis|Arvo);
 .wrapper {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-}
+  grid-template-columns: 2fr 1fr; }
 
 .Home-titleslide {
   background-color: #FFC929;
-}
+  height: 100vw; }
+  .Home-titleslide p {
+    font-size: 23px;
+    font-family: "Dosis";
+    text-transform: uppercase; }
+  .Home-titleslide h1 {
+    font-size: 90px;
+    font-family: "Arvo";
+    font-weight: 500; }
 
-
-.Home-titleslide p {
-  font-weight: 700;
+.Home-navigation ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 20px auto auto 20px;
+  color: white;
   font-size: 20px;
-}
+  letter-spacing: 2px; }
+
+.Home-navigation li {
+  margin: 20px 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: "Dosis"; }

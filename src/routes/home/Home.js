@@ -12,9 +12,9 @@ class Home extends Component {
         </div>
         <div className="Home-navigation">
           <ul className="Home-links">
-            <li>Add a recipe</li>
-            <li>View existing recipes</li>
-            <li>Meal planning</li>
+            <li>&#9632; Add a recipe</li>
+            <li>&#9632; View existing recipes</li>
+            <li>&#9632; Meal planning</li>
           </ul>
         </div>
       </div>
