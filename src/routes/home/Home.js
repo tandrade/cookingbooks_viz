@@ -7,12 +7,14 @@ class Home extends Component {
     return (
       <div className="wrapper">
         <div className="Home-titleslide">
-          <h1>Pepino</h1>
-          <p>A recipe manager</p>
+          <div className="Home-logo">
+            <h1>Pepino</h1>
+            <p>A recipe manager</p>
+          </div>
         </div>
         <div className="Home-navigation">
           <ul className="Home-links">
-            <li>&#9632; Add a recipe</li>
+            <li><a href="/add_recipe">&#9632; Add a recipe</a></li>
             <li>&#9632; View existing recipes</li>
             <li>&#9632; Meal planning</li>
           </ul>

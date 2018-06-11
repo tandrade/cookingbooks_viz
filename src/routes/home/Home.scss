@@ -11,23 +11,29 @@ $arvo: 'Arvo';
 .Home-titleslide {
   background-color: #FFC929;
   height: 100vw;
+  box-shadow: 15px 3px 5px 0px #187581;
+}
+
+.Home-logo {
+  margin: 50px;
 
   p {
     font-size: 23px;
     font-family: $nunito;
-    text-transform: uppercase;]
+    text-transform: uppercase;
     letter-spacing: 4px;
+    margin: 0px;
   }
 
   h1 {
     font-size: 90px;
     font-family: $arvo;
     font-weight: 500;
+    margin: 0px;
   }
 }
 
 .Home-navigation {
-
   ul {
     list-style-type: none;
     padding: 10px;
@@ -42,6 +48,11 @@ $arvo: 'Arvo';
     text-transform: uppercase;
     font-weight: 600;
     font-family: $nunito;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
 }
