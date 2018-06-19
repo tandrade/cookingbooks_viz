@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as recipeActions from '../../data/actions/submittedRecipeActions';
+
 class AddRecipe extends Component {
 
   constructor(props) {
@@ -18,7 +21,13 @@ class AddRecipe extends Component {
   }
 
   handleSubmit(event) {
-    alert("This URL would be submitted: " + this.state.url);
+    const { url } = this.state;
+    const { dispatch } = this.props;
+    if (url) {
+      dispatch(recipeActions.submitRecipe);
+    } else {
+      alert("invalid URL!");
+    }
     event.preventDefault();
   }
 
@@ -39,11 +48,17 @@ class AddRecipe extends Component {
           <label>URL:
             <input type="text" value={this.state.url} onChange={this.handleChange} />
           </label>
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );
   }
-
 }
 
-export default AddRecipe;
+const mapStateToProps = state => {
+  return {
+    uploadedRecipe: state.submittedRecipe
+  };
+};
+
+export default connect(mapStateToProps)(AddRecipe);

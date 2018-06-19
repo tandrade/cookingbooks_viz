@@ -13,23 +13,25 @@ TODO: add some typescript to this project
 */
 export function submitRecipeLoading() {
   return {
-    type: SUBMIT_RECIPE_LOADING
-    isLoading: true;
-  }
+    type: types.SUBMIT_RECIPE_LOADING,
+    isLoading: true
+  };
 }
 
 export function submitRecipeFailure(err) {
   return {
-    type: SUBMIT_RECIPE_ERROR,
+    type: types.SUBMIT_RECIPE_ERROR,
     isLoading: false,
     error: err
-  }
+  };
 }
 
 export function submitRecipeSuccess(data) {
-  type: SUBMIT_RECIPE_SUCCESS,
-  isLoading: false,
-  data: data
+  return {
+    type: types.SUBMIT_RECIPE_SUCCESS,
+    isLoading: false,
+    data: data
+  };
 }
 
 export function submitRecipe(url) {
@@ -47,7 +49,8 @@ export function submitRecipe(url) {
       } else {
         dispatch(submitRecipeFailure(response.json()))
       }
+    })
+    .catch((err) => {
+      dispatch(submitRecipeFailure(err));
     });
-
   }
-}
