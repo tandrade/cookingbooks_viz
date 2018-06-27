@@ -34,23 +34,25 @@ export function submitRecipeSuccess(data) {
   };
 }
 
-export function submitRecipe(url) {
+export const submitRecipe = (url, dispatch) => {
+  return (dispatch) => {
     dispatch(submitRecipeLoading());
 
     return fetch("http://localhost:8000/ingested_recipes/", {
-      method: 'POST',
-      body: {
-        'source_type': 'internet',
-        'source': url
-      }
-    }).then((response) => {
-      if (response.ok) {
-        dispatch(submitRecipeSuccess(response.json()))
-      } else {
-        dispatch(submitRecipeFailure(response.json()))
-      }
-    })
-    .catch((err) => {
-      dispatch(submitRecipeFailure(err));
-    });
+        method: 'POST',
+        body: {
+          'source_type': 'internet',
+          'source': url
+        }
+      }).then((response) => {
+        if (response.ok) {
+          dispatch(submitRecipeSuccess(response.json()))
+        } else {
+          dispatch(submitRecipeFailure(response.json()))
+        }
+      })
+      .catch((err) => {
+        dispatch(submitRecipeFailure(err));
+      });
+    }
   }
