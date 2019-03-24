@@ -7,32 +7,61 @@ class AddRecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nIngredients : 0
+      ingredients: []
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onClean (i, data) {
+    const ingredients = [...this.state.ingredients]
+    ingredients[i] = data
+    this.setState({
+      ingredients: ingredients
+    })
+  }
+
+  onUnclean (i) {
+    const ingredients = [...this.state.ingredients]
+    ingredients[i] = {}
+    this.setState({
+      ingredients: ingredients
+    })
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
   }
 
   addRow = (evt) => {
+    const ingredients = [...this.state.ingredients];
+    ingredients.push({});
     this.setState({
-      ...this.state,
-      nIngredients: this.state.nIngredients + 1
+      ingredients: ingredients
     });
     evt.preventDefault();
   }
 
+  removeRow = (rowIndex) => {
+    const newIngredients = this.state.visibleIngredients.filter((ingredient, i) => i !== ingredient)
+    this.setState({
+      ...this.state,
+      visibleIngredients: newIngredients
+    })
+  }
+
   render() {
-    const { nIngredients } = this.state;
-    let completedIngredients = [];
-    for (let i=0; i < nIngredients; i++) {
-      completedIngredients.push(<IngredientRow key={i}/>);
-    }
+    const { ingredients } = this.state
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>Ingredients</label>
-          { completedIngredients }
+          {ingredients.map((ingredient, i) =>
+            <IngredientRow key={i} onClean={this.onClean} onUnclean={this.onUnclean} />
+          )}
           <button title="Add" onClick={this.addRow} />
           <IngredientRow />
         <label>Instructions</label>
           <input className="widetext" type="text"/>
+        <input type="submit" value="Submit" />
       </form>
     );
   }
