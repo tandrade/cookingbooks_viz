@@ -12,7 +12,7 @@ class AddRecipeForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onClean (i, data) {
+  onClean = (i, data) => {
     const ingredients = [...this.state.ingredients]
     ingredients[i] = data
     this.setState({
@@ -20,7 +20,7 @@ class AddRecipeForm extends Component {
     })
   }
 
-  onUnclean (i) {
+  onUnclean = (i) => {
     const ingredients = [...this.state.ingredients]
     ingredients[i] = {}
     this.setState({
@@ -58,7 +58,7 @@ class AddRecipeForm extends Component {
             <IngredientRow key={i} onClean={this.onClean} onUnclean={this.onUnclean} />
           )}
           <button title="Add" onClick={this.addRow} />
-          <IngredientRow />
+          <IngredientRow onClean={this.onClean} onUnclean={this.onUnclean} />
         <label>Instructions</label>
           <input className="widetext" type="text"/>
         <input type="submit" value="Submit" />
