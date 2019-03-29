@@ -30,29 +30,33 @@ class IngredientRow extends Component {
       ingredientError
     } = this.state;
     if (quantity && ingredient && measurement && !quantityError && !ingredientError) {
-      this.props.onClean();
+      this.props.onClean(this.props.index, {
+        quantity: quantity,
+        ingredient: ingredient,
+        measurement: measurement
+      });
     } else {
       this.props.onUnclean();
     }
   }
 
   onChangeQuantity = (val) => {
-    const error = val && quantityRegex.test(val);
+    const matches = val && quantityRegex.test(val);
     this.setState({
       ...this.state,
       quantity: val,
-      quantityError: error
+      quantityError: !matches
     });
     this.checkIfValidInput();
   }
 
   onChangeIngredient = (val) => {
     // could be DRYed up with above, but maybe more readable this way...
-    const error = val && ingredientRegex.test(val);
+    const matches = val && ingredientRegex.test(val);
     this.setState({
       ...this.state,
       ingredient: val,
-      ingredientError: error
+      ingredientError: !matches
     });
     this.checkIfValidInput();
   }
@@ -76,9 +80,9 @@ class IngredientRow extends Component {
   render() {
     return (
       <section>
-        <input onChange={this.onChangeQuantity} type="text"></input>
-        <input onChange={this.onChangeMeasurement} type="text"></input>
-        <input onChange={this.onChangeIngredient} ype="text"></input>
+        <input onChange={(evt) => this.onChangeQuantity(evt.target.value)} type="text"></input>
+        <input onChange={(evt) => this.onChangeMeasurement(evt.target.value)} type="text"></input>
+        <input onChange={(evt) => this.onChangeIngredient(evt.target.value)} ype="text"></input>
       </section>
     );
   }

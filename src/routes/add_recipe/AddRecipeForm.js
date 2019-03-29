@@ -13,8 +13,8 @@ class AddRecipeForm extends Component {
   }
 
   onClean = (i, data) => {
-    const ingredients = [...this.state.ingredients]
-    ingredients[i] = data
+    const ingredients = [...this.state.ingredients];
+    ingredients[i] = data;
     this.setState({
       ingredients: ingredients
     })
@@ -30,6 +30,18 @@ class AddRecipeForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+  }
+
+  renderIngredientList = () => {
+    const { ingredients } = this.state
+    return (
+      <div>
+        <p>Live ingredient list:</p>
+        {ingredients.forEach((ingredient) => {
+          return (<div>{ingredient}</div>);
+        })}
+      </div>
+    )
   }
 
   addRow = (evt) => {
@@ -50,19 +62,25 @@ class AddRecipeForm extends Component {
   }
 
   render() {
-    const { ingredients } = this.state
+    const { ingredients } = this.state;
+    const ingredientsWithExtra = ingredients.length + 1;
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Ingredients</label>
-          {ingredients.map((ingredient, i) =>
-            <IngredientRow key={i} onClean={this.onClean} onUnclean={this.onUnclean} />
-          )}
-          <button title="Add" onClick={this.addRow} />
-          <IngredientRow onClean={this.onClean} onUnclean={this.onUnclean} />
-        <label>Instructions</label>
-          <input className="widetext" type="text"/>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>Ingredients</label>
+            <button title="Add" onClick={this.addRow} />
+            {
+              [...Array(ingredientsWithExtra)].map((e, i) => {
+                return (<IngredientRow index={i} key={i} onClean={this.onClean} onUnclean={this.onUnclean} />);
+              })
+            }
+          <label>Instructions</label>
+            <input className="widetext" type="text"/>
+          <input type="submit" value="Submit" />
+        </form>
+        {this.renderIngredientList()}
+      </div>
     );
   }
 }
