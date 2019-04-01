@@ -6,7 +6,16 @@ const ingredientRegex = RegExp(".*[A-Za-z]+.*");
 
 class IngredientRow extends Component {
 
-  measurementOptions = [];  // TODO: get canonical references from python code
+  measurementOptions = [
+    'tsp',
+    'tbsp',
+    'g',
+    'cup',
+    'qt',
+    'oz',
+    'lb',
+    'ct'
+  ]
 
   constructor(props) {
     super(props)
@@ -81,7 +90,14 @@ class IngredientRow extends Component {
     return (
       <section>
         <input onChange={(evt) => this.onChangeQuantity(evt.target.value)} type="text"></input>
-        <input onChange={(evt) => this.onChangeMeasurement(evt.target.value)} type="text"></input>
+        <select onChange={(evt) => this.onChangeMeasurement(evt.target.value)} type="dropdown">
+          {
+            this.measurementOptions.map((option) => {
+              const readableValue = option === 'ct' ? '-' : option;
+              return (<option value={option}>{readableValue}</option>);
+            })
+          }
+        </select>
         <input onChange={(evt) => this.onChangeIngredient(evt.target.value)} ype="text"></input>
       </section>
     );

@@ -33,12 +33,15 @@ class AddRecipeForm extends Component {
   }
 
   renderIngredientList = () => {
-    const { ingredients } = this.state
+    const { ingredients } = this.state;
     return (
       <div>
         <p>Live ingredient list:</p>
-        {ingredients.forEach((ingredient) => {
-          return (<div>{ingredient}</div>);
+        {ingredients.map((ingredient, i) => {
+          if (!ingredient) {
+            return (<div key={i}>-</div>);
+          }
+          return (<div key={i}>{ingredient.quantity} {ingredient.measurement} {ingredient.ingredient}</div>);
         })}
       </div>
     )
