@@ -64,12 +64,50 @@ class AddRecipeForm extends Component {
     })
   }
 
+  onSubmit = () => {
+    const recipeData = this.state.visibleIngredients;
+    if (!recipeData) {
+      this.setState({
+        errors: ["Could not validate recipe data."]
+      });
+    }
+    // FIXME: get real data and the real API here
+    fetch("http://localhost:8000/recipes/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(recipeData)
+    }).then((resp) => {
+      this.setState({
+        recipeId: resp.data.id
+      })
+    });
+  }
+
+  renderSuccess = (recipeId) => {
+    return (
+      <div>
+        Your recipe has been successfully created! <a href="/recipes/{id}">View it here.</a>
+      </div>
+    )
+  }
+
+  renderErrors = (errors) => {
+    return (
+      <div>Your recipe could not be created. Please try again.</div>
+    )
+  }
+
   render() {
-    const { ingredients } = this.state;
+    const { ingredients, errors, recipeId } = this.state;
     const ingredientsWithExtra = ingredients.length + 1;
+
 
     return (
       <div>
+      {Boolean(recipeId) && this.renderSuccess() }
+      {Boolean(errors) && this.renderErrors() }
         <form onSubmit={this.handleSubmit}>
           <label>Ingredients</label>
             <button title="Add" onClick={this.addRow} />
